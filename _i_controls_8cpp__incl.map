@@ -1,0 +1,25 @@
+<map id="IControls.cpp" name="IControls.cpp">
+<area shape="rect" id="node2" href="$_i_controls_8h.html" title="A collection of IControls for common UI widgets, such as knobs, sliders, switches. " alt="" coords="1810,80,1896,107"/>
+<area shape="rect" id="node3" href="$_i_control_8h.html" title="This file contains the base IControl implementation, along with some base classes for specific types ..." alt="" coords="1602,229,1680,256"/>
+<area shape="rect" id="node41" href="$_i_color_picker_control_8h.html" title="A control for choosing a color. " alt="" coords="1396,155,1543,181"/>
+<area shape="rect" id="node42" href="$_i_v_keyboard_control_8h.html" title="Vectorial keyboard control. " alt="" coords="2233,155,2375,181"/>
+<area shape="rect" id="node43" href="$_i_v_meter_control_8h.html" title="Vectorial multichannel capable meter control. " alt="" coords="2087,155,2208,181"/>
+<area shape="rect" id="node46" href="$_i_v_scope_control_8h.html" title="Vectorial multichannel capable oscilloscope control. " alt="" coords="1791,155,1916,181"/>
+<area shape="rect" id="node47" href="$_i_v_multi_slider_control_8h.html" title="A vectorial multi&#45;slider control. " alt="" coords="1567,155,1715,181"/>
+<area shape="rect" id="node48" href="$_i_r_t_text_control_8h.html" title="A control to display some text in the UI, driven by values in the RT audio thread. " alt="" coords="1940,155,2063,181"/>
+<area shape="rect" id="node6" href="$_i_plug_platform_8h.html" title="Include to get consistently named preprocessor macros for different platforms and logging functionali..." alt="" coords="568,827,679,853"/>
+<area shape="rect" id="node9" href="$_i_graphics_8h.html" title="The lowest level base class of an IGraphics context. " alt="" coords="1337,304,1425,331"/>
+<area shape="rect" id="node10" href="$_i_plug_constants_8h.html" title="IPlug Constant definitions, Types, magic numbers. " alt="" coords="2376,827,2499,853"/>
+<area shape="rect" id="node11" href="$_i_plug_logger_8h.html" title="IPlug logging a.k.a tracing functionality. " alt="" coords="1994,677,2096,704"/>
+<area shape="rect" id="node22" href="$_i_graphics_constants_8h_source.html" title="IGraphicsConstants.h" alt="" coords="93,752,241,779"/>
+<area shape="rect" id="node23" href="$_i_graphics_structs_8h_source.html" title="IGraphicsStructs.h" alt="" coords="629,677,759,704"/>
+<area shape="rect" id="node29" href="$_i_graphics_utilities_8h_source.html" title="IGraphicsUtilities.h" alt="" coords="616,603,749,629"/>
+<area shape="rect" id="node30" href="$_i_graphics_popup_menu_8h.html" title="A class for setting the contents of a pop up menu. " alt="" coords="1079,677,1237,704"/>
+<area shape="rect" id="node31" href="$_i_graphics_editor_delegate_8h.html" title="An editor delgate base class for a SOMETHING that uses IGraphics for it&#39;s UI. " alt="" coords="1143,379,1317,405"/>
+<area shape="rect" id="node19" href="$_i_plug_utilities_8h.html" title="Utility functions and macros. " alt="" coords="1609,752,1716,779"/>
+<area shape="rect" id="node32" href="$_i_plug_editor_delegate_8h.html" title="This pure virtual interface delegates communication in both directions between a UI editor and someth..." alt="" coords="1187,453,1335,480"/>
+<area shape="rect" id="node34" href="$_i_plug_parameter_8h.html" title="IPlug&#39;s parameter class. " alt="" coords="1415,677,1537,704"/>
+<area shape="rect" id="node36" href="$_i_plug_midi_8h.html" title="MIDI and sysex structs/utilites. " alt="" coords="2062,603,2148,629"/>
+<area shape="rect" id="node37" href="$_i_plug_structs_8h_source.html" title="IPlugStructs.h" alt="" coords="1938,528,2043,555"/>
+<area shape="rect" id="node44" href="$_i_plug_queue_8h.html" title="A lock&#45;free SPSC queue used to transfer data between threads based on MLQueue.h by Randy Jones based ..." alt="" coords="2041,229,2143,256"/>
+</map>
