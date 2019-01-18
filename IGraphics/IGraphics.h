@@ -54,6 +54,7 @@
 #endif
 
 class IControl;
+class IControlLayer;
 class IPopupMenuControl;
 class ITextEntryControl;
 class ICornerResizerControl;
@@ -791,7 +792,14 @@ public:
    * @param group A CString that you can use to address controlled by group
    * @return The index of the control (and the number of controls in the stack) */
   int AttachControl(IControl* pControl, int controlTag = kNoTag, const char* group = "");
-
+  
+  /** Attach an IControl to the graphics context and add it to the top of the control stack. The control is owned by the graphics context and will be deleted when the context is deleted.
+   * @param pControl A pointer to an IControl to attach.
+   * @param controlTag An integer tag that you can use to identify the control
+   * @param group A CString that you can use to address controlled by group
+   * @return The index of the control (and the number of controls in the stack) */
+  int AttachControlLayer(IControlLayer * pControlLayer);
+  
   /** @param idx The index of the control to get
    * @return A pointer to the IControl object at idx or nullptr if not found */
   IControl* GetControl(int idx) { return mControls.Get(idx); }
@@ -809,7 +817,10 @@ public:
   
   /** @return The number of controls that have been added to this graphics context */
   int NControls() const { return mControls.GetSize(); }
-
+  
+  /** @return The number of control layers that have been added to this graphics context */
+  int NControlLayers() const { return mControlLayers.GetSize(); }
+  
   /** Remove controls from the control list above a particular index, (frees memory).  */
   void RemoveControls(int fromIdx);
   
@@ -1071,6 +1082,7 @@ private:
   void ForAllControls(T method, Args... args);
   
   WDL_PtrList<IControl> mControls;
+  WDL_PtrList<IControlLayer> mControlLayers;
 
   // Order (front-to-back) ToolTip / PopUp / TextEntry / LiveEdit / Corner / PerfDisplay
   

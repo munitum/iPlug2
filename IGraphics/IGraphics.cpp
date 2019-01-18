@@ -36,6 +36,8 @@ typedef IPlugVST3Controller VST3_API_BASE;
 #include "IPopupMenuControl.h"
 #include "ITextEntryControl.h"
 
+#include "IControlLayer.h"
+
 struct SVGHolder
 {
   NSVGimage* mImage = nullptr;
@@ -205,6 +207,12 @@ int IGraphics::AttachControl(IControl* pControl, int controlTag, const char* gro
   pControl->SetGroup(group);
   mControls.Add(pControl);
   return mControls.GetSize() - 1;
+}
+
+int IGraphics::AttachControlLayer(IControlLayer* pControlLayer)
+{
+  mControlLayers.Add(pControlLayer);
+  return mControlLayers.GetSize() - 1;
 }
 
 void IGraphics::AttachCornerResizer(EUIResizerMode sizeMode, bool layoutOnResize)
