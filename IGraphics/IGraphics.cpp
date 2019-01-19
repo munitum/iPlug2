@@ -209,9 +209,14 @@ int IGraphics::AttachControl(IControl* pControl, int controlTag, const char* gro
   return mControls.GetSize() - 1;
 }
 
-int IGraphics::AttachControlLayer(IControlLayer* pControlLayer)
+int IGraphics::AttachControlLayer(IControlLayer* pControlLayer, bool addControls)
 {
   mControlLayers.Add(pControlLayer);
+  if (addControls) {
+    pControlLayer -> ForAllControlsFunc([&](IControl& control){
+      this -> AttachControl(&control);
+    });
+  }
   return mControlLayers.GetSize() - 1;
 }
 
@@ -286,6 +291,20 @@ IControl* IGraphics::GetControlWithTag(int controlTag)
   }
   
   return nullptr;
+}
+
+IControlLayer * IGraphics::GetControlLayer(const char * name) {
+  IControlLayer * found = nullptr;
+  for (int i = 0; i < mControlLayers.GetSize(); i++){
+    IControlLayer * pControlLayer = mControlLayers.Get(i);
+    if (CStringHasContents(pControlLayer-> GetName())){
+      if (strcmp(pControlLayer-> GetName(), name) == 0){
+        found = pControlLayer;
+        break;
+      }
+    }
+  }
+  return found;
 }
 
 void IGraphics::HideControl(int paramIdx, bool hide)

@@ -793,12 +793,7 @@ public:
    * @return The index of the control (and the number of controls in the stack) */
   int AttachControl(IControl* pControl, int controlTag = kNoTag, const char* group = "");
   
-  /** Attach an IControl to the graphics context and add it to the top of the control stack. The control is owned by the graphics context and will be deleted when the context is deleted.
-   * @param pControl A pointer to an IControl to attach.
-   * @param controlTag An integer tag that you can use to identify the control
-   * @param group A CString that you can use to address controlled by group
-   * @return The index of the control (and the number of controls in the stack) */
-  int AttachControlLayer(IControlLayer * pControlLayer);
+  int AttachControlLayer(IControlLayer * pControlLayer, bool addControls = false);
   
   /** @param idx The index of the control to get
    * @return A pointer to the IControl object at idx or nullptr if not found */
@@ -814,6 +809,8 @@ public:
 
   /* Get the first control in the control list, the background */
   IControl* GetBackgroundControl() { return GetControl(0);  }
+  
+  IControlLayer * GetControlLayer(const char * name);
   
   /** @return The number of controls that have been added to this graphics context */
   int NControls() const { return mControls.GetSize(); }

@@ -23,7 +23,7 @@ public:
   }
   
   int AddControl(IControl * pControl);
-  int AddLayer(IControl * pControl);
+  int AddLayer(IControlLayer * pPlayer);
   const char * GetName() { return name; }
   void ForAllControlsFunc(std::function<void(IControl& control)> func);
   IControlLayer * GetSubLayerByName(const char * layerName);

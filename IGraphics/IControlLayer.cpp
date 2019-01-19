@@ -12,7 +12,8 @@ int IControlLayer::AddLayer(IControlLayer * pLayer) {
 
 void IControlLayer::ForAllControlsFunc(std::function<void(IControl& control)> func) {
   for (int i = 0; i < mControls.GetSize(); i++){
-    func(mControls.Get(i));
+    IControl * control = mControls.Get(i);
+    func(*control);
   }
   for (int i = 0; i < mControlLayers.GetSize(); i++){
     IControlLayer * pLayer = mControlLayers.Get(i);
@@ -21,13 +22,13 @@ void IControlLayer::ForAllControlsFunc(std::function<void(IControl& control)> fu
 }
 
 void IControlLayer::Hide(bool hide){
-  ForAllControlsFunc([&](IControl& control){
-      control.Hide(hide)
-  })
+  this -> ForAllControlsFunc([hide](IControl& control){
+    control.Hide(hide);
+  });
 }
 
 IControlLayer * IControlLayer::GetSubLayerByName(const char * layerName) {
-  auto found = nullptr;
+  IControlLayer * found = nullptr;
   for (int i = 0; i < mControlLayers.GetSize(); i++){
     IControlLayer * pControlLayer = mControlLayers.Get(i);
     if (CStringHasContents(pControlLayer-> GetName())){
