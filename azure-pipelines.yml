@@ -1,48 +1,74 @@
 trigger:
-- master
+- azure
 
-pool:
-  vmImage: 'macOS-10.13'
+jobs:
+- job: Build
+  strategy:
+    matrix:
+      mac:
+        imageName: 'macos-10.13'
+        isMac: true
+#      windows:
+#        imageName: 'vs2017-win2016'
+#        isWindows: true
+#      linux:
+#      imageName: 'ubuntu-16.04'
+#        isLinux: true
 
-steps:
-- task: Xcode@5
-  inputs:
-    actions: 'build'
-    scheme: 'APP'
-    sdk: 'macosx10.13'
-    configuration: 'Release'
-    xcWorkspacePath: 'Tests/IGraphicsTest/IGraphicsTest.xcworkspace'
-    xcodeVersion: "9"
-- task: Xcode@5
-  inputs:
-    actions: 'build'
-    scheme: 'APP'
-    sdk: 'macosx10.13'
-    configuration: 'Release'
-    xcWorkspacePath: 'Tests/IGraphicsStressTest/IGraphicsStressTest.xcworkspace'
-    xcodeVersion: "9"
-- task: Xcode@5
-  inputs:
-    actions: 'build'
-    scheme: 'APP'
-    sdk: 'macosx10.13'
-    configuration: 'Release'
-    xcWorkspacePath: 'Examples/IPlugControls/IPlugControls.xcworkspace'
-    xcodeVersion: "9"
-- task: Xcode@5
-  inputs:
-    actions: 'build'
-    scheme: 'APP'
-    sdk: 'macosx10.13'
-    configuration: 'Release'
-    xcWorkspacePath: 'Examples/IPlugEffect/IPlugEffect.xcworkspace'
-    xcodeVersion: "9"
-- task: Xcode@5
-  inputs:
-    actions: 'build'
-    scheme: 'APP'
-    sdk: 'macosx10.13'
-    configuration: 'Release'
-    xcWorkspacePath: 'Examples/IPlugInstrument/IPlugInstrument.xcworkspace'
-    xcodeVersion: "9"
+  pool:
+    vmImage: $(imageName)
+    
+  steps:
+  - checkout: self
 
+  - bash: |
+      ./Dependencies/IGraphics/build-igraphics-libs-mac.sh
+    condition: variables.isMac
+    displayName: Build macOS IGraphics Dependencies
+
+  - task: CopyFiles@2
+    inputs:
+      contents: Dependencies/Build/**
+      targetFolder: $(Build.ArtifactStagingDirectory)
+    condition: variables.isMac
+    displayName: Copy macOS IGraphics Dependencies Artifacts
+
+  # - bash: |
+  #     wget http://releases.llvm.org/7.0.0/clang+llvm-7.0.0-x86_64-apple-darwin.tar.xz
+  #     tar -xf clang+llvm-7.0.0-x86_64-apple-darwin.tar.xz -C $HOME
+  #     export PATH=$HOME/clang+llvm-7.0.0-x86_64-apple-darwin/bin:$PATH
+  #     echo "##vso[task.setvariable variable=PATH]$PATH"
+  #     cd ./Dependencies/Extras/faust/
+  #     ./build-faust-mac.sh
+  #   condition: variables.isMac
+  #   displayName: Build macOS Extras Dependencies - FAUST
+
+  # - bash: |
+  #     cd ./Dependencies/Extras/civetweb/
+  #     ./build-civetweb-mac.sh
+  #   condition: variables.isMac
+  #   displayName: Build macOS Extras Dependencies - CIVETWEB
+
+  # - task: CopyFiles@2
+  #   inputs:
+  #     contents: Dependencies/Build/mac/**
+  #     targetFolder: $(Build.ArtifactStagingDirectory)
+  #   condition: variables.isMac
+  #   displayName: Copy macOS Extras Dependencies Artifacts
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      artifactName: 'iPlug2_deps_macOS'
+      pathtoPublish: $(Build.ArtifactStagingDirectory)
+    condition: variables.isMac
+    displayName: Publish macOS Dependencies Artifacts
+    
+  
+#  - task: Xcode@5
+#    inputs:
+#      actions: 'build'
+#      scheme: 'APP'
+#      sdk: 'macosx10.13'
+#      configuration: 'Release'
+#      xcWorkspacePath: 'Tests/IGraphicsTest/IGraphicsTest.xcworkspace'
+#      xcodeVersion: "9"
