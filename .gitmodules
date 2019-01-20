@@ -1,0 +1,3 @@
+[submodule "Examples/jsonControls"]
+	path = Examples/jsonControls
+	url = https://munitum@github.com/munitum/jsonControls
